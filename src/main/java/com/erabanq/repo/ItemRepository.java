@@ -25,10 +25,10 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
     void deleteById(Long aLong);
 
 
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM Answer a WHERE a.question.id = :questionId)")
-    void deleteAllByQuestionId(@Param("questionId") Long questionId);
+//    @Modifying
+//    @Transactional
+//    @Query("DELETE FROM Answer a WHERE a.question.id = :questionId)")
+//    void deleteAllByQuestionId(@Param("questionId") Long questionId);
 
 //    @Query("SELECT i FROM Interview i WHERE i.state = :state)")
 //    Set<Interview> find(@Param(State.class) State state);
