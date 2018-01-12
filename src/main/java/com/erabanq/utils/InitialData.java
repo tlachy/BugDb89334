@@ -19,7 +19,7 @@ public class InitialData {
 
     public void load(){
 
-        currencyData.load();
+        currencyData.initializeStaticData();
 
 
         /**

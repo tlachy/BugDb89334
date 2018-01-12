@@ -12,14 +12,14 @@ import javax.annotation.PostConstruct;
 import static com.erabanq.utils.SecurityUtils.runAs;
 
 @Component
-//@Profile("test")
+@Profile("initialize-static-data")
 public class CurrencyData {
 
     @Autowired
     CurrencyRepository repository;
 
     @PostConstruct
-    public void load(){
+    public void initializeStaticData() {
 
         runAs("system", "system", "ROLE_ADMIN");
 
@@ -56,5 +56,7 @@ public class CurrencyData {
         repository.save(new Currency(31L, "ZAR", "South African Rand'"));
 
         SecurityContextHolder.clearContext();
+        
     }
+    
 }
