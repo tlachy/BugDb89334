@@ -4,7 +4,8 @@ import com.erabanq.entity.Currency;
 import com.erabanq.repo.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.core.annotation.Order;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,7 @@ import static com.erabanq.utils.SecurityUtils.runAs;
 
 @Component
 @Profile("initialize-static-data")
+@Order(1)
 public class CurrencyData {
 
     @Autowired
@@ -23,7 +25,6 @@ public class CurrencyData {
 
         runAs("system", "system", "ROLE_ADMIN");
 
-        repository.save(new Currency(1L, "AUD", "Australian Dollar'"));
         repository.save(new Currency(2L, "BCH", "Bitcoin Cash'"));
         repository.save(new Currency(3L, "BRL", "Brazilian Real'"));
         repository.save(new Currency(4L, "BTC", "Bitcoin'"));
@@ -55,7 +56,7 @@ public class CurrencyData {
         repository.save(new Currency(30L, "XRP", "Ripple'"));
         repository.save(new Currency(31L, "ZAR", "South African Rand'"));
 
-        SecurityContextHolder.clearContext();
+//        SecurityContextHolder.clearContext();
         
     }
     

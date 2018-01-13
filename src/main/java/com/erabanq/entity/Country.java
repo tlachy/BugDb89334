@@ -29,9 +29,9 @@ public class Country {
     @GeneratedValue
     private Integer id;
 
-    @Column(length = 30, unique = true, nullable = false)
+    @Column(length = 40, unique = true, nullable = false)
     private String code;
 
-    @Column(length = 30, unique = true, nullable = false)
+    @Column(length = 40, unique = true, nullable = false)
     private String name;
 }
