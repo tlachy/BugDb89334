@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
+@Accessors(chain = true)
 @NoArgsConstructor
 public class Transfer {
 

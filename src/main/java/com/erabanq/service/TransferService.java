@@ -31,6 +31,7 @@ public class TransferService {
                 && toAccount.isPresent()
                 && amount.compareTo(ZERO) > 0){
 
+            this.transfer(fromAccount.get(), toAccount.get(), amount);
 
         } else {
             //some exception
@@ -48,10 +49,5 @@ public class TransferService {
         accountRepository.save(toAccount);
 
         transferRepository.save(new Transfer(fromAccount, toAccount, amount));
-
     }
-
-
-
-
 }
