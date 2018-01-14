@@ -6,6 +6,7 @@ import com.erabanq.repo.AccountRepository;
 import com.erabanq.repo.TransferRepository;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.StaleStateException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,37 +14,25 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import static java.math.BigDecimal.*;
+import static javax.transaction.Transactional.TxType.REQUIRES_NEW;
 
 @Service
 @AllArgsConstructor
 public class TransferService {
 
     TransferRepository transferRepository;
-
     AccountRepository accountRepository;
 
-    public void transfer(long fromAccountId, long toAccountId, @NonNull BigDecimal amount){
 
-        Optional<Account> fromAccount = accountRepository.findById(fromAccountId);
-        Optional<Account> toAccount = accountRepository.findById(toAccountId);
-
-        if(fromAccount.isPresent()
-                && toAccount.isPresent()
-                && amount.compareTo(ZERO) > 0){
-
-            this.transfer(fromAccount.get(), toAccount.get(), amount);
-
-        } else {
-            //some exception
-        }
-
-    }
-
-    @Transactional
-    public void transfer(Account fromAccount, Account toAccount, BigDecimal amount){
+    @Transactional(REQUIRES_NEW)
+    public void transfer(Account fromAccount, Account toAccount, BigDecimal amount) throws InterruptedException {
 
         fromAccount.setBalance(fromAccount.getBalance().subtract(amount));
         accountRepository.save(fromAccount);
+
+        if(fromAccount.getId() == 1L){
+            Thread.currentThread().sleep(10000);
+        }
 
         toAccount.setBalance(toAccount.getBalance().add(amount));
         accountRepository.save(toAccount);
