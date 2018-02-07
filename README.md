@@ -17,11 +17,12 @@
 * run "java -jar --add-modules java.xml.bind psp-1.0-SNAPSHOT.jar"
 * go to "http://localhost:8080/swagger-ui.html#!/transfer45controller/tranferUsingPOST"
 * send:
-              {
-                "ammount": 10,
-                "fromAccountId": 1,
-                "toAccountId": 2
-              }
+
+                          {
+                            "ammount": 10,
+                            "fromAccountId": 1,
+                            "toAccountId": 2
+                          }
               
 and then
 
